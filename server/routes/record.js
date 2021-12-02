@@ -12,7 +12,7 @@ const dbo = require("../db/conn");
 const ObjectId = require("mongodb").ObjectId;
 
 
-recordRoutes.route("/users").get((req, res) => {
+recordRoutes.route("/api/users").get((req, res) => {
   let db_connect = dbo.getDb("speakEasy");
   db_connect
     .collection("users")

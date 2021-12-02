@@ -4,14 +4,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios'
 function App() {
   const [users, setUsers] = useState([])
-    const dataRetrieval = async () => await axios.get('http://localhost:5000/users')
+    const dataRetrieval = async () => await axios.get('/api/users')
       .then(result => {setUsers(result.data)})
       .catch(err => console.error(err))
 
     useEffect(() => {
       dataRetrieval();
     }, []);
-    console.log();
   return (
     <div className="App">
       <header className="App-header">
