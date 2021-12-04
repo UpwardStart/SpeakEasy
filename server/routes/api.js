@@ -10,15 +10,6 @@ router.get("/api/users", (req, res) => {
     .find({})
     .then(users => res.status(200).json(users))
     .catch(err => res.status(400).json('An error has occurred'))
-
-  // let db_connect = dbo.getDb("speakEasy")
-  // db_connect
-  //   .collection("users")
-  //   .find({})
-  //   .toArray( (err, result) => {
-  //     if(err) throw err;
-  //     res.json(result);
-  //   })
 })
 
 router.post("/api/sendMessage", (req, res) => {
