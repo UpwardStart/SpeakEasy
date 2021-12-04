@@ -22,4 +22,10 @@ router.post("/api/sendMessage", (req, res) => {
   .catch(err => res.status(400).json('Something went wrong'));
 })
 
+router.get('/api/sendMessage', async (req, res) => {
+  const messages = await Message.find({})
+  res.status(200).json(messages);
+
+})
+
 module.exports = router;
