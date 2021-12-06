@@ -1,19 +1,33 @@
-const express = require("express");
-const app = express();
-const cors = require("cors");
-require("dotenv").config({ path: "./config.env" });
-const port = process.env.PORT || 5000;
+const express = require("express")
+const app = express()
+const http = require('http')
+const cors = require("cors")
+require("dotenv").config({ path: "./config.env" })
+const server = http.createServer(app)
+const { Server } = require('socket.io')
 app.use(cors());
-app.use(express.json());
-app.use(require("./routes/record"));
-// get driver connection
-const dbo = require("./db/conn");
+app.use(express.json())
+app.use(require("./routes/api"))
 
-app.listen(port, () => {
-  // perform a database connection when server starts
-  dbo.connectToServer(function (err) {
-    if (err) console.error(err);
+const mongoose = require('mongoose')
+mongoose.connect(process.env.ATLAS_URI);
 
+const port = process.env.PORT || 5000
+
+const io = new Server(server, {
+  cors: 'http://localhost:3000',
+  methods: ["GET", "POST"]
+})
+
+io.on("connection", socket => {
+  console.log(`Use connected: ${socket.id}`)
+
+  socket.on("disconnect", () => {
+    console.log(`User has disconnected: ${socket.id}`)
+  })
+
+})
+
+server.listen(port, () => {
+    console.log(`Server is running on port: ${port}`)
   });
-  console.log(`Server is running on port: ${port}`);
-});

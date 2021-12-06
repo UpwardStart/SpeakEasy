@@ -1,35 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
-import { useEffect, useState } from 'react';
-import axios from 'axios'
-function App() {
-  const [users, setUsers] = useState([])
-    const dataRetrieval = async () => await axios.get('/api/users')
-      .then(result => {setUsers(result.data)})
-      .catch(err => console.error(err))
+import io from 'socket.io-client'
 
-    useEffect(() => {
-      dataRetrieval();
-    }, []);
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        {users.map(user => <h2>Email {user.email} </h2>) }
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const socket = io.connect("http://localhost:3003")
+
+
+function App() {
+return (
+  <h1>Hello World</h1>
+)
 }
 
 export default App;
