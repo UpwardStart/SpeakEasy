@@ -11,14 +11,14 @@ router.get("/api/users", (req, res) => {
     .catch(err => res.status(400).json('An error has occurred'))
 })
 
-router.post("/api/sendMessage", (req, res) => {
+router.post("/api/message", (req, res) => {
   Message
     .create(req.body)
     .then( message => res.status(201).json(message))
     .catch(err => res.status(400).json('Something went wrong'));
 })
 
-router.get('/api/sendMessage', (req, res) => {
+router.get('/api/message', (req, res) => {
   Message
     .find({})
     .then(messages => res.status(200).json(messages))
