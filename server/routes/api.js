@@ -5,6 +5,7 @@ const ObjectId = require("mongodb").ObjectId
 const Message = require('../models/messages')
 const mongoose = require('mongoose');
 const User = require('../models/users')
+const jwt = require('jsonwebtoken')
 router.get("/api/users", (req, res) => {
   User
     .find({})
@@ -47,6 +48,40 @@ router.post('/api/auth/sign-up', (req, res, next) => {
     })
   }
 })
+
+router.post('/api/auth/sign-in', (req, res) => {
+  const {username, password} = req.body
+  if(!username || !password){
+    console.log('username here');
+    res.status(401).json('invalid login')
+  } else {
+    User
+    .findOne({username})
+    .then(user => {
+      if(user === null){
+        res.status(404).json('invalid login')
+      } else {
+        argon2
+        .verify(user.password, password)
+        .then(verification => {
+          if(!verification){
+            res.status(401).json('invalid login')
+          } else {
+            const credentials = {
+              id: user._id,
+              username: user.username
+            }
+            const token = jwt.sign(credentials, process.env.TOKEN_SECRET)
+            console.log(token);
+            res.status(200).json({credentials, token})
+          }
+        })
+      }
+    })
+    .catch(err => res.status(401).json(err))
+  }
+})
+
 
 
 
