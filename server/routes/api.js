@@ -26,19 +26,26 @@ router.get('/api/message', (req, res) => {
     .catch(err => res.status(400).json('An error has occurred'))
 })
 
-router.post('/api/auth/sign-up', (req, res) => {
+router.post('/api/auth/sign-up', (req, res, next) => {
   const {username, password} = req.body
   if(!username || !password) {
     res.status(400).json('Username and password are required')
-  }
-  argon2
+  } else {
+    argon2
     .hash(password)
     .then(hashedPassword => {
       User
-        .create({username, password: hashedPassword})
-        .then(user => res.status(201).json(user))
-        .catch(err => res.status(401).json('Something went wrong'))
+      .create({username, password: hashedPassword})
+      .then(user => res.status(201).json(user))
+      .catch(err => {
+        if(err.code === 11000) {
+          res.status(401).json('Username already exists, try again')
+        } else {
+          res.status(400).json('Invalid credentials please try again')
+        }
+      })
     })
+  }
 })
 
 
