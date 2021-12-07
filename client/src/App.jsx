@@ -43,7 +43,7 @@ function App() {
         />
       </Box>
       <Box component="div" sx={{ marginTop: '2rem'}}>
-        <Button variant="contained" onClick={joinRoom} sx={{width: '10rem', height: '3rem' }}>Create</Button>
+        <Button variant="contained" onClick={joinRoom} sx={{width: '10rem', height: '3rem' }}>Join</Button>
       </Box>
       <Box>
         <Chat socket={socket} username={username} chat={chat}/>
