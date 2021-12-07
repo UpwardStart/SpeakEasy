@@ -52,7 +52,6 @@ router.post('/api/auth/sign-up', (req, res, next) => {
 router.post('/api/auth/sign-in', (req, res) => {
   const {username, password} = req.body
   if(!username || !password){
-    console.log('username here');
     res.status(401).json('invalid login')
   } else {
     User
@@ -72,7 +71,6 @@ router.post('/api/auth/sign-in', (req, res) => {
               username: user.username
             }
             const token = jwt.sign(credentials, process.env.TOKEN_SECRET)
-            console.log(token);
             res.status(200).json({credentials, token})
           }
         })
