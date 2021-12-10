@@ -3,11 +3,11 @@ const Schema = mongoose.Schema
 
 const ChatSchema = new Schema({
   userId1: { type: mongoose.Schema.Types.ObjectId,
-             ref: 'user',
+             ref: 'users',
              required: [true, 'Two users are required']
           },
   userId2: { type: mongoose.Schema.Types.ObjectId,
-             ref: 'user',
+             ref: 'users',
              required: [true, 'Two users are required']
           },
   messages: [msgSchema],
