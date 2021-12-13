@@ -7,7 +7,7 @@ const MessageSchema = new Schema({
   },
   senderId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+    ref: 'users',
     required: [true, 'Must contain user']
   }
 })
