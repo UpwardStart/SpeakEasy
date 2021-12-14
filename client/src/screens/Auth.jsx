@@ -19,7 +19,7 @@ export default function Auth (props) {
       <AuthForm
         key={action}
         action={action}
-        onSignIn={handleSignIn} />
+        onSignIn={props.onSignIn} />
     </Grid>
   );
 

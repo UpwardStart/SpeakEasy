@@ -2,33 +2,39 @@ import React from 'react';
 import {
   Grid,
   Box,
-  Typography,
   Button,
   FormControl,
   TextField,
+  Link,
 } from "@mui/material"
 
 export default function AuthForm(props) {
-  const handleRegister = (event) => {
+  const { action } = props;
+  console.log('action', action);
+  const link = action === 'sign-in'
+    ? "#sign-up"
+    : "#sign-in"
+  const message = action === 'sign-in'
+    ? "Don't have an account? Sign up instead!"
+    : "Have an account? Sign in instead!";
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const { action } = props;
-    const email = event.target.email.value;
+    const username = event.target.email.value;
     const password = event.target.password.value;
-    console.log(email);
-    console.log(password);
     const req = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ username, password })
     };
     fetch(`/api/auth/${action}`, req)
       .then(res => res.json())
       .then(result => {
         if (action === 'sign-up') {
           window.location.hash = 'sign-in';
-        } else if (result.user && result.token) {
+        } else if (result.credentials && result.token) {
           props.onSignIn(result);
         }
       });
@@ -37,7 +43,7 @@ export default function AuthForm(props) {
   return (
     <Grid container justify="center">
      <Box>
-       <form onSubmit={handleRegister}>
+       <form onSubmit={handleSubmit}>
          <Grid>
            <Grid>
             <FormControl>
@@ -62,10 +68,15 @@ export default function AuthForm(props) {
               />
             </FormControl>
           </Grid>
-          <Grid>
-            <Button type="submit" size="large">
-              Sign-up
-            </Button>
+          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            <Grid item xs={6}>
+              <Link href={link}>{message}</Link>
+            </Grid>
+            <Grid item xs={6}>
+              <Button type="submit" size="large">
+                { action.toUpperCase() }
+              </Button>
+            </Grid>
           </Grid>
          </Grid>
        </form>

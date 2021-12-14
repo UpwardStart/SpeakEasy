@@ -12,8 +12,8 @@ const centerStyle  = {
    justifyContent: 'center',
   }
 
-export default function ChatRoom() {
-  const [username, setUsername]  = useState('');
+export default function ChatRoom(props) {
+  const { username } = props.user;
   const [chat, setChat] = useState('')
 
   const joinRoom = () => {
@@ -32,15 +32,6 @@ export default function ChatRoom() {
       value={chat}
       onChange={e => setChat(e.target.value)}
       />
-      </Box>
-      <Box component="div">
-        <TextField
-        variant="outlined"
-        label="Username"
-        sx={{width: 500}}
-        value={username}
-          onChange={e => setUsername(e.target.value)}
-        />
       </Box>
       <Box component="div" sx={{ marginTop: '2rem'}}>
         <Button variant="contained" onClick={joinRoom} sx={{width: '10rem', height: '3rem' }}>Join</Button>

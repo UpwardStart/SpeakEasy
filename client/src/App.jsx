@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import ChatRoom from './ChatRoom';
 import Auth from './screens/Auth';
 import parseRoute from './lib/parse-route';
 import Home from './screens/Home';
@@ -10,15 +9,16 @@ export default function App() {
   const [route, setRoute] = useState(parseRoute(window.location.hash));
 
   useEffect(() => {
-    window.addEventListener('hashChange', () => {
+    window.addEventListener('hashchange', () => {
+      console.log('hash change');
       setRoute(parseRoute(window.location.hash));
     });
   }, []);
 
   const handleSignIn = (result) => {
-    const { user, token } = result;
+    const { credentials, token } = result;
     window.localStorage.setItem('react-context-jwt', token);
-    setUser({ user });
+    setUser({ user: credentials });
   }
 
   const handleSignOut = () => {
@@ -27,7 +27,6 @@ export default function App() {
   }
 
   const renderPage = () => {
-    console.log(route);
     if (route.path === '') {
       return <Home
         user={user}
