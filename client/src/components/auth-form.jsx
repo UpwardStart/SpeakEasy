@@ -10,7 +10,6 @@ import {
 
 export default function AuthForm(props) {
   const { action } = props;
-  console.log('action', action);
   const link = action === 'sign-in'
     ? "#sign-up"
     : "#sign-in"

@@ -3,16 +3,16 @@ import ChatRoom from '../ChatRoom';
 import Auth from './Auth';
 
 export default function Home(props) {
-  const { user } = props;
+  const { user, onSignOut, onSignIn } = props;
 
   return (
     user
       ? <ChatRoom
         user={user}
-        onSignOut={props.handleSignOut} />
+        onSignOut={onSignOut} />
       : <Auth
           key='sign-in'
           action='sign-in'
-          onSignIn={props.onSignIn} />
+          onSignIn={onSignIn} />
   );
 }

@@ -4,7 +4,7 @@ import AuthForm from '../components/auth-form';
 import Redirect from '../components/redirect';
 
 export default function Auth (props) {
-  const { user, action, handleSignIn } = props;
+  const { user, action, onSignIn } = props;
 
   if (user) return <Redirect to="" />;
 
@@ -17,9 +17,8 @@ export default function Auth (props) {
         <Typography>{welcomeMessage}</Typography>
       </Box>
       <AuthForm
-        key={action}
         action={action}
-        onSignIn={props.onSignIn} />
+        onSignIn={onSignIn} />
     </Grid>
   );
 

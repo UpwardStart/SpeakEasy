@@ -10,7 +10,6 @@ export default function App() {
 
   useEffect(() => {
     window.addEventListener('hashchange', () => {
-      console.log('hash change');
       setRoute(parseRoute(window.location.hash));
     });
   }, []);
@@ -35,13 +34,11 @@ export default function App() {
     }
     if (route.path === 'sign-in') {
       return <Auth
-        key="sign-in"
         action="sign-in"
         onSignIn={handleSignIn} />
     }
     if (route.path === 'sign-up') {
       return <Auth
-        key="sign-up"
         action="sign-up"
         onSignIn={handleSignIn} />
     }
