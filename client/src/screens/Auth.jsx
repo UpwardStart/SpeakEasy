@@ -1,9 +1,28 @@
 import React from 'react';
-import { Grid, Box, Typography }  from '@mui/material';
+import { makeStyles }  from '@mui/styles';
 import AuthForm from '../components/auth-form';
 import Redirect from '../components/redirect';
+import { Box, Typography } from '@mui/material';
+
+const useStyles = makeStyles(() => ({
+  root: {
+    display: "flex",
+    flexGrow: 8,
+    flexDirection: "column"
+  },
+  loginContainer: {
+    display: "flex",
+    flexDirection: "column",
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  }
+
+}))
+
 
 export default function Auth (props) {
+  const classes = useStyles();
   const { user, action, onSignIn } = props;
 
   if (user) return <Redirect to="" />;
@@ -12,14 +31,16 @@ export default function Auth (props) {
     ? 'Welcome!' : 'Sign Up'
 
   return (
-    <Grid container justify="center">
-      <Box>
-        <Typography>{welcomeMessage}</Typography>
+    <Box className={classes.root}>
+      <Typography variant="h2">
+        {welcomeMessage}
+      </Typography>
+      <Box className={classes.loginContainer}>
+        <AuthForm
+          action={action}
+          onSignIn={onSignIn} />
       </Box>
-      <AuthForm
-        action={action}
-        onSignIn={onSignIn} />
-    </Grid>
+    </Box>
   );
 
 }
