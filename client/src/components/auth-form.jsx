@@ -42,7 +42,7 @@ export default function AuthForm(props) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Box>
+        <Box sx={{ py: 1 }}>
           <FormControl>
             <TextField
               aria-label="email"
@@ -50,11 +50,11 @@ export default function AuthForm(props) {
               name="email"
               type="text"
               required
-              fullWidth
+              style={{ width: 280 }}
             />
           </FormControl>
         </Box>
-        <Box>
+        <Box sx={{ py: 1 }}>
           <FormControl>
             <TextField
               aria-label="password"
@@ -63,11 +63,11 @@ export default function AuthForm(props) {
               inputProps={{ minLength: 6 }}
               name="password"
               required
-              fullWidth
+              style={{ width: 280 }}
             />
           </FormControl>
         </Box>
-        <Box>
+        <Box sx={{ py: 2 }}>
           <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             <Grid item xs={6}>
               <Link href={link}>{message}</Link>

@@ -8,14 +8,17 @@ const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
     flexGrow: 8,
-    flexDirection: "column"
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 60,
   },
   loginContainer: {
     display: "flex",
     flexDirection: "column",
     flexGrow: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: "space-between",
+
   }
 
 }))
@@ -32,10 +35,12 @@ export default function Auth (props) {
 
   return (
     <Box className={classes.root}>
-      <Typography variant="h2">
-        {welcomeMessage}
-      </Typography>
       <Box className={classes.loginContainer}>
+        <Typography
+          variant="h2"
+          sx={{ py: 2 }}>
+          {welcomeMessage}
+        </Typography>
         <AuthForm
           action={action}
           onSignIn={onSignIn} />
