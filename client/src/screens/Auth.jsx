@@ -11,13 +11,14 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 60,
+    marginTop: 100,
   },
   loginContainer: {
     display: "flex",
     flexDirection: "column",
     flexGrow: 1,
-    justifyContent: "space-between",
+    width: 400,
+    minHeight: "100vh"
 
   }
 
