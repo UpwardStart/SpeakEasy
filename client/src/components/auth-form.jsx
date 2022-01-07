@@ -7,9 +7,21 @@ import {
   Link,
 } from "@mui/material"
 import { Box } from '@mui/system';
+import { blue } from '@mui/material/colors';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles((theme) => {
+  return {
+    button: {
+      backgroundColor: blue,
+      color: "white",
+    }
+  };
+});
 
 export default function AuthForm(props) {
   const { action } = props;
+  const classes = useStyles();
   const link = action === 'sign-in'
     ? "#sign-up"
     : "#sign-in"
@@ -42,7 +54,7 @@ export default function AuthForm(props) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Box sx={{ py: 1 }}>
+        <Box sx={{ py: 2 }}>
           <FormControl>
             <TextField
               aria-label="email"
@@ -68,12 +80,12 @@ export default function AuthForm(props) {
           </FormControl>
         </Box>
         <Box sx={{ py: 2 }}>
-          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-            <Grid item xs={6}>
+          <Grid container justifyContent="space-between" >
+            <Grid item xs={8}>
               <Link href={link}>{message}</Link>
             </Grid>
-            <Grid item xs={6}>
-              <Button type="submit" size="large">
+            <Grid item>
+              <Button type="submit" className='classes.button'>
                 { action.toUpperCase() }
               </Button>
             </Grid>
