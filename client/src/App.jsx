@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import Auth from './screens/Auth';
 import parseRoute from './lib/parse-route';
 import Home from './screens/Home';
+import { theme } from './themes/themes';
+import { ThemeProvider } from '@mui/styles';
 
 
 export default function App() {
@@ -45,8 +47,8 @@ export default function App() {
   }
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       { renderPage() }
-    </>
+    </ThemeProvider>
   );
 }

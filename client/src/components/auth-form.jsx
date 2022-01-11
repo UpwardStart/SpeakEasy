@@ -10,14 +10,14 @@ import { Box } from '@mui/system';
 import { blue } from '@mui/material/colors';
 import { makeStyles } from '@mui/styles';
 
-const useStyles = makeStyles((theme) => {
-  return {
-    button: {
-      backgroundColor: blue,
-      color: "white",
-    }
-  };
-});
+const useStyles = makeStyles(() => ({
+  blueButton: {
+    backgroundColor: blue,
+    color: '#ffffff',
+    textDecoration: 'none',
+    borderRadius: '4px',
+  },
+}));
 
 export default function AuthForm(props) {
   const { action } = props;
@@ -85,8 +85,8 @@ export default function AuthForm(props) {
               <Link href={link}>{message}</Link>
             </Grid>
             <Grid item>
-              <Button type="submit" className='classes.button'>
-                { action.toUpperCase() }
+              <Button type="submit" className={classes.blueButton}>
+                { action }
               </Button>
             </Grid>
           </Grid>
