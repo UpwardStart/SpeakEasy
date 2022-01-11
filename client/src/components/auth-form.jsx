@@ -85,7 +85,9 @@ export default function AuthForm(props) {
               <Link href={link}>{message}</Link>
             </Grid>
             <Grid item>
-              <Button type="submit" className={classes.blueButton}>
+              <Button type="submit"
+                className={classes.blueButton}
+                variant="contained">
                 { action }
               </Button>
             </Grid>
