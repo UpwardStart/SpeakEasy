@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
     backgroundColor: blue,
     color: '#ffffff',
     textDecoration: 'none',
-    borderRadius: '4px',
+    borderRadius: 30,
   },
 }));
 
@@ -62,7 +62,7 @@ export default function AuthForm(props) {
               name="email"
               type="text"
               required
-              style={{ width: 280 }}
+              style={{ width: 350 }}
             />
           </FormControl>
         </Box>
@@ -75,7 +75,7 @@ export default function AuthForm(props) {
               inputProps={{ minLength: 6 }}
               name="password"
               required
-              style={{ width: 280 }}
+              style={{ width: 350 }}
             />
           </FormControl>
         </Box>
@@ -85,7 +85,8 @@ export default function AuthForm(props) {
               <Link href={link}>{message}</Link>
             </Grid>
             <Grid item>
-              <Button type="submit"
+              <Button sx={{ borderRadius: 30 }}
+                type="submit"
                 className={classes.blueButton}
                 variant="contained">
                 { action }

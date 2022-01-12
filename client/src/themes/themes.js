@@ -5,7 +5,6 @@ export const theme = createTheme({
     fontFamily: "Open Sans, sans-serif",
     fontSize: 14,
     button: {
-      textTransform: "uppercase",
       letterSpacing: 0,
       fontWeight: "bold"
     },
@@ -15,6 +14,9 @@ export const theme = createTheme({
       input: {
         fontWeight: "bold"
       }
+    },
+    MuiButton: {
+      borderRadius: '30px'
     }
   },
   palette: {
