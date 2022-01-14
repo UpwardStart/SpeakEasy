@@ -2,7 +2,10 @@ import { createTheme } from "@mui/system";
 
 export const theme = createTheme({
   typography: {
-    fontFamily: "Open Sans, sans-serif",
+    fontFamily: [
+      'Raleway',
+      'sans-serif',
+    ].join(','),
     fontSize: 14,
     button: {
       letterSpacing: 0,
@@ -15,9 +18,6 @@ export const theme = createTheme({
         fontWeight: "bold"
       }
     },
-    MuiButton: {
-      borderRadius: '30px'
-    }
   },
   palette: {
     primary: { main: "#3A8DFF" },
