@@ -1,55 +1,51 @@
-import io from 'socket.io-client'
-import {Box, TextField, Button } from '@mui/material'
-import { useState } from 'react'
-import Chat from './Chat'
-const socket = io.connect("http://localhost:3003")
+import { useEffect, useState } from 'react';
+import Auth from './screens/Auth';
+import parseRoute from './lib/parse-route';
+import Home from './screens/Home';
 
+export default function App() {
+  const [user, setUser] = useState(null);
+  const [route, setRoute] = useState(parseRoute(window.location.hash));
 
-const centerStyle  = {
-   display: 'flex',
-   flexDirection: 'column',
-   alignItems: 'center',
-   justifyContent: 'center',
+  useEffect(() => {
+    window.addEventListener('hashchange', () => {
+      setRoute(parseRoute(window.location.hash));
+    });
+  }, []);
+
+  const handleSignIn = (result) => {
+    const { credentials, token } = result;
+    window.localStorage.setItem('react-context-jwt', token);
+    setUser({ user: credentials });
   }
 
-function App() {
-  const [username, setUsername]  = useState('');
-  const [chat, setChat] = useState('')
+  const handleSignOut = () => {
+    window.localStorage.removeItem('react-content-jwt');
+    setUser(null);
+  }
 
-  const joinRoom = () => {
-    if(username !== '' && chat !== ''){
-      socket.emit('join_room', chat)
+  const renderPage = () => {
+    if (route.path === '') {
+      return <Home
+        user={user}
+        onSignOut={handleSignOut}
+        onSignIn={handleSignIn}/>
+    }
+    if (route.path === 'sign-in') {
+      return <Auth
+        action="sign-in"
+        onSignIn={handleSignIn} />
+    }
+    if (route.path === 'sign-up') {
+      return <Auth
+        action="sign-up"
+        onSignIn={handleSignIn} />
     }
   }
 
   return (
-    <Box sx={centerStyle}>
-      <Box component="div" sx={{height: 100}}>
-      <TextField
-      variant="outlined"
-      label="Chat Room"
-      sx={{width: 500, marginTop: '2rem'}}
-      value={chat}
-      onChange={e => setChat(e.target.value)}
-      />
-      </Box>
-      <Box component="div">
-        <TextField
-        variant="outlined"
-        label="Username"
-        sx={{width: 500}}
-        value={username}
-          onChange={e => setUsername(e.target.value)}
-        />
-      </Box>
-      <Box component="div" sx={{ marginTop: '2rem'}}>
-        <Button variant="contained" onClick={joinRoom} sx={{width: '10rem', height: '3rem' }}>Join</Button>
-      </Box>
-      <Box>
-        <Chat socket={socket} username={username} chat={chat}/>
-      </Box>
-    </Box>
-  )
+    <>
+      { renderPage() }
+    </>
+  );
 }
-
-export default App;
